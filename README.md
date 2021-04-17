@@ -1,5 +1,5 @@
 # MicroservicesGatewayDotNetCoreAndOcelot
-TOOLS - Who to create microservices gateway with DotNetCore, Ocelot and Swagger 
+TOOLS - How to create microservices gateway with DotNetCore, Ocelot and Swagger 
 
 
 1. Create ASP.NET Core Web App (Model-View-Controller)  project 3.1.
