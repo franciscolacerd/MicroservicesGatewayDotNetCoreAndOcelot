@@ -191,3 +191,50 @@ namespace Gateway
 
 ![image](https://user-images.githubusercontent.com/6674269/115075157-8f657f80-9ef2-11eb-8054-b019aa042f51.png)
 
+10. Configure "Tokenize in Archive" at "release pipeline" in Azure Devops CI/CD from ocelot.json transformation:
+
+![image](https://user-images.githubusercontent.com/6674269/115299165-5d545780-a156-11eb-82bc-ae9ab76873cd.png)
+
+11. Configure Variables at "release pipeline" in Azure Devops CI/CD from ocelot.json transformation:
+
+![image](https://user-images.githubusercontent.com/6674269/115299382-a3a9b680-a156-11eb-9e9a-d3e6ae829e08.png)
+
+12. Add script to ocelot.json:
+
+```
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "#{Host}#",
+          "Port": #{Port}#
+        }
+      ],
+      "UpstreamPathTemplate": "/{everything}",
+      "UpstreamHttpMethod": [],
+      "SwaggerKey": "MetricsApi"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "#{BaseUrl}#"
+  },
+  "SwaggerEndPoints": [
+    {
+      "Key": "MetricsApi",
+      "Config": [
+        {
+          "Name": "Metrics Api",
+          "Version": "v1",
+          "Url": "#{SwaggerUrl}#/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}
+
+```
+
+
