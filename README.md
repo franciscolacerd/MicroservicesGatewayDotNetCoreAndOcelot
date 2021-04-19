@@ -42,7 +42,14 @@ namespace Gateway
                 {
                     var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.ConfigureAppConfiguration(config => config.AddJsonFile($"Configuration/ocelot.{env}.json"));
+                    if ("env".Equals(env))
+                    {
+                        webBuilder.ConfigureAppConfiguration(config => config.AddJsonFile($"Configuration/ocelot.{env}.json"));
+                    }
+                    else
+                    {
+                        webBuilder.ConfigureAppConfiguration(config => config.AddJsonFile($"Configuration/ocelot.json"));
+                    }
                 }).ConfigureLogging(logging => logging.AddConsole());
     }
 }
