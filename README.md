@@ -215,7 +215,7 @@ namespace Gateway
       ],
       "UpstreamPathTemplate": "/{everything}",
       "UpstreamHttpMethod": [],
-      "SwaggerKey": "MetricsApi"
+      "SwaggerKey": "ABCApi"
     }
   ],
   "GlobalConfiguration": {
@@ -223,10 +223,10 @@ namespace Gateway
   },
   "SwaggerEndPoints": [
     {
-      "Key": "MetricsApi",
+      "Key": "ABCApi",
       "Config": [
         {
-          "Name": "Metrics Api",
+          "Name": "ABC Api",
           "Version": "v1",
           "Url": "#{SwaggerUrl}#/swagger/v1/swagger.json"
         }
