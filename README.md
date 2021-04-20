@@ -54,7 +54,7 @@ namespace Gateway
 
 4. Add to Startup.cs in ConfigureServices(IServiceCollection services)
 
-            services.AddOcelot();
+            services.AddOcelot().AddAppConfiguration();
             services.AddSwaggerGen();
             services.AddSwaggerForOcelot(Configuration);
             
@@ -94,7 +94,7 @@ namespace Gateway
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddOcelot();
+            services.AddOcelot().AddAppConfiguration();
             services.AddSwaggerGen();
             services.AddSwaggerForOcelot(Configuration);
             services.AddControllersWithViews();
@@ -202,7 +202,7 @@ ocelot.SwaggerEndPoints.json
 
 ![image](https://user-images.githubusercontent.com/6674269/115423606-df478d80-a1f5-11eb-97c5-3314fec0567d.png)
 
-10. Configure "Tokenize in Archive" at "release pipeline" in Azure Devops CI/CD from ocelot.json transformation:
+10. Configure "Tokenize in Archive" at "release pipeline" in Azure Devops CI/CD from ocelot.*.json transformation:
 
 ![image](https://user-images.githubusercontent.com/6674269/115424274-744a8680-a1f6-11eb-9b21-e1cb70f0fabc.png)
 
@@ -210,8 +210,9 @@ ocelot.SwaggerEndPoints.json
 
 ![image](https://user-images.githubusercontent.com/6674269/115299382-a3a9b680-a156-11eb-9e9a-d3e6ae829e08.png)
 
-12. Add script to ocelot.json:
+12. Add script to ocelot.*.json files:
 
+ocelot.abc.json
 ```
 {
   "Routes": [
@@ -228,10 +229,28 @@ ocelot.SwaggerEndPoints.json
       "UpstreamHttpMethod": [],
       "SwaggerKey": "ABCApi"
     }
-  ],
+  ]
+}
+
+```
+
+
+
+ocelot.global.json
+```
+{
   "GlobalConfiguration": {
     "BaseUrl": "#{BaseUrl}#"
-  },
+  }
+}
+
+```
+
+
+
+ocelot.SwaggerEndPoints.json
+```
+{
   "SwaggerEndPoints": [
     {
       "Key": "ABCApi",
