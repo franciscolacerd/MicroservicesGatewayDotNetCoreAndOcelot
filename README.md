@@ -16,7 +16,7 @@ TOOLS - How to create microservices gateway with DotNetCore, Ocelot and Swagger
 
 3. Add to Program.cs in ConfigureAppConfiguration((hostingContext, config) =>
 
-             .AddOcelotWithSwaggerSupport((o) => o.Folder = hostingContext.HostingEnvironment.IsDevelopment() ? "Configuration/Dev" : "Configuration/Prod")
+             .AddOcelotWithSwaggerSupport((o) => o.Folder = hostingContext.HostingEnvironment.IsDevelopment() ? "Configuration/Debug" : "Configuration/Release")
 
 ```
 using Microsoft.AspNetCore.Hosting;
@@ -44,7 +44,7 @@ namespace Gateway
                         .AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json",
                             optional: true, reloadOnChange: true)
                         .AddJsonFile($"appsettings.local.json", optional: true, reloadOnChange: true)
-                        .AddOcelotWithSwaggerSupport((o) => o.Folder = hostingContext.HostingEnvironment.IsDevelopment() ? "Configuration/Dev" : "Configuration/Prod")
+                        .AddOcelotWithSwaggerSupport((o) => o.Folder = hostingContext.HostingEnvironment.IsDevelopment() ? "Configuration/Debug" : "Configuration/Release")
                         .AddEnvironmentVariables();
                 })
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>()).ConfigureLogging(logging => logging.AddConsole());
@@ -144,8 +144,7 @@ namespace Gateway
 
 7. Add configuration files at:
 
-![image](https://user-images.githubusercontent.com/6674269/115422570-f043cf00-a1f4-11eb-97cd-67496f4c1a76.png)
-
+![image](https://user-images.githubusercontent.com/6674269/115424571-bbd11280-a1f6-11eb-9bf0-1416c3ab34d6.png)
 
 8. With configurations:
 
@@ -205,7 +204,7 @@ ocelot.SwaggerEndPoints.json
 
 10. Configure "Tokenize in Archive" at "release pipeline" in Azure Devops CI/CD from ocelot.json transformation:
 
-![image](https://user-images.githubusercontent.com/6674269/115299165-5d545780-a156-11eb-82bc-ae9ab76873cd.png)
+![image](https://user-images.githubusercontent.com/6674269/115424274-744a8680-a1f6-11eb-9b21-e1cb70f0fabc.png)
 
 11. Configure Variables at "release pipeline" in Azure Devops CI/CD from ocelot.json transformation:
 
