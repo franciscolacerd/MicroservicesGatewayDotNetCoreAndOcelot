@@ -8,24 +8,22 @@ TOOLS - How to create microservices gateway with DotNetCore, Ocelot and Swagger
 
 >MMLib.SwaggerForOcelot (3.2.1)
 
+>MMLib.Ocelot.Provider.AppConfiguration (1.1.0)
+
 >Ocelot (16.0.1)
 
 >Swashbuckle.AspNetCore (6.1.2)
 
-3. Add to Program.cs in CreateHostBuilder(string[] args) =>
+3. Add to Program.cs in ConfigureAppConfiguration((hostingContext, config) =>
 
-            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-            webBuilder.ConfigureAppConfiguration(config => config.AddJsonFile($"Configuration/ocelot.{env}.json"));
+             .AddOcelotWithSwaggerSupport((o) => o.Folder = hostingContext.HostingEnvironment.IsDevelopment() ? "Configuration/Dev" : "Configuration/Prod")
 
 ```
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MMLib.SwaggerForOcelot.DependencyInjection;
 
 namespace Gateway
 {
@@ -38,19 +36,18 @@ namespace Gateway
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+                .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-                    webBuilder.UseStartup<Startup>();
-                    if ("env".Equals(env))
-                    {
-                        webBuilder.ConfigureAppConfiguration(config => config.AddJsonFile($"Configuration/ocelot.{env}.json"));
-                    }
-                    else
-                    {
-                        webBuilder.ConfigureAppConfiguration(config => config.AddJsonFile($"Configuration/ocelot.json"));
-                    }
-                }).ConfigureLogging(logging => logging.AddConsole());
+                    config
+                        .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
+                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                        .AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json",
+                            optional: true, reloadOnChange: true)
+                        .AddJsonFile($"appsettings.local.json", optional: true, reloadOnChange: true)
+                        .AddOcelotWithSwaggerSupport((o) => o.Folder = hostingContext.HostingEnvironment.IsDevelopment() ? "Configuration/Dev" : "Configuration/Prod")
+                        .AddEnvironmentVariables();
+                })
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>()).ConfigureLogging(logging => logging.AddConsole());
     }
 }
 ```
