@@ -199,9 +199,9 @@ ocelot.SwaggerEndPoints.json
 }
 ```
 
-9. Set dev enviroment at:
+9. Set Development enviroment at:
 
-![image](https://user-images.githubusercontent.com/6674269/115075157-8f657f80-9ef2-11eb-8054-b019aa042f51.png)
+![image](https://user-images.githubusercontent.com/6674269/115423606-df478d80-a1f5-11eb-97c5-3314fec0567d.png)
 
 10. Configure "Tokenize in Archive" at "release pipeline" in Azure Devops CI/CD from ocelot.json transformation:
 
