@@ -144,7 +144,7 @@ namespace Gateway
 
 7. Add configuration files at:
 
-![image](https://user-images.githubusercontent.com/6674269/115424571-bbd11280-a1f6-11eb-9bf0-1416c3ab34d6.png)
+![image](https://user-images.githubusercontent.com/6674269/115430389-3b151500-a1fc-11eb-9d15-d58e60b90788.png)
 
 8. With configurations:
 
