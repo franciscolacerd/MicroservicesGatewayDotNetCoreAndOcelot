@@ -16,7 +16,7 @@ TOOLS - How to create microservices gateway with DotNetCore, Ocelot and Swagger
 
 3. Add to Program.cs in ConfigureAppConfiguration((hostingContext, config) =>
 
-             .AddOcelotWithSwaggerSupport((o) => o.Folder = hostingContext.HostingEnvironment.IsDevelopment() ? "Configuration/Debug" : "Configuration/Release")
+             .AddOcelotWithSwaggerSupport((o) => o.Folder = hostingContext.HostingEnvironment.IsDevelopment() ? "Configuration/DebugConfig" : "Configuration/ReleaseConfig")
 
 ```
 using Microsoft.AspNetCore.Hosting;
@@ -44,7 +44,7 @@ namespace Gateway
                         .AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json",
                             optional: true, reloadOnChange: true)
                         .AddJsonFile($"appsettings.local.json", optional: true, reloadOnChange: true)
-                        .AddOcelotWithSwaggerSupport((o) => o.Folder = hostingContext.HostingEnvironment.IsDevelopment() ? "Configuration/Debug" : "Configuration/Release")
+                        .AddOcelotWithSwaggerSupport((o) => o.Folder = hostingContext.HostingEnvironment.IsDevelopment() ? "Configuration/DebugConfig" : "Configuration/ReleaseConfig")
                         .AddEnvironmentVariables();
                 })
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>()).ConfigureLogging(logging => logging.AddConsole());
