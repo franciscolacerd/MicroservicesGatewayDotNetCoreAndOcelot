@@ -142,13 +142,15 @@ namespace Gateway
 }
 ```
 
-7. Add configuration file ocelot.json and ocelot.dev.json at:
+7. Add configuration files at:
 
-![image](https://user-images.githubusercontent.com/6674269/115074760-0d755680-9ef2-11eb-8cf5-9e252859d0c3.png)
+![image](https://user-images.githubusercontent.com/6674269/115422570-f043cf00-a1f4-11eb-97cd-67496f4c1a76.png)
 
 
-8. With configuration:
+8. With configurations:
 
+
+ocelot.Development.json
 ```
 {
   "Routes": [
@@ -165,10 +167,23 @@ namespace Gateway
       "UpstreamHttpMethod": [],
       "SwaggerKey": "ABCApi"
     }
-  ],
+  ]
+}
+```
+
+
+ocelot.global.json
+```
+{
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost"
-  },
+  }
+}
+```
+
+ocelot.SwaggerEndPoints.json
+```
+{
   "SwaggerEndPoints": [
     {
       "Key": "ABCApi",
