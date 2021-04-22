@@ -204,7 +204,7 @@ ocelot.SwaggerEndPoints.json
 
 10. Configure "Tokenize in Archive" at "release pipeline" in Azure Devops CI/CD from ocelot.*.json transformation:
 
-![image](https://user-images.githubusercontent.com/6674269/115424274-744a8680-a1f6-11eb-9b21-e1cb70f0fabc.png)
+![image](https://user-images.githubusercontent.com/6674269/115686916-960c5080-a351-11eb-87a1-5c19ac866572.png)
 
 11. Configure Variables at "release pipeline" in Azure Devops CI/CD from ocelot.json transformation:
 
